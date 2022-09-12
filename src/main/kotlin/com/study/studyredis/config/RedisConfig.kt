@@ -98,7 +98,9 @@ class RedisPubSubConfig{
             println("Message received: $message")
         }
 
-        fun comsumeMessage() = messageList.first()
+        fun comsumeMessage() = messageList.first().apply {
+            messageList.removeFirst()
+        }
         companion object {
             val messageList: MutableList<String> = ArrayList()
         }
