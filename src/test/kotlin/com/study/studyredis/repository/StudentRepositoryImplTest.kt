@@ -8,12 +8,10 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.autoconfigure.data.redis.AutoConfigureDataRedis
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
 import org.springframework.context.annotation.ComponentScan
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.test.context.ContextConfiguration
 import java.util.*
 
@@ -79,6 +77,7 @@ internal class StudentRepositoryImplTest {
         val find = sut.findById(studentId).orElseThrow()
         assertThat(find.age,`is`(28))
     }
+
 
 
 }

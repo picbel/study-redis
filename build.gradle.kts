@@ -25,8 +25,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("it.ozimov:embedded-redis:0.7.2")
+    implementation("redis.clients:jedis:4.2.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
 
 
 }
