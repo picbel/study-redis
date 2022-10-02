@@ -27,6 +27,7 @@ dependencies {
     implementation("it.ozimov:embedded-redis:0.7.2")
     implementation("redis.clients:jedis:4.2.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.redisson:redisson:3.17.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")

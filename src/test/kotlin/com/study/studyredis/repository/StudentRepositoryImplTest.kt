@@ -3,6 +3,7 @@ package com.study.studyredis.repository
 import com.study.studyredis.config.RedisConfig
 import com.study.studyredis.config.RedisProperties
 import com.study.studyredis.domain.Student
+import com.study.studyredis.repository.suite.RedisTestSuite
 import com.study.studyredis.test.config.TestRedisConfig
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
@@ -16,20 +17,8 @@ import org.springframework.test.context.ContextConfiguration
 import java.util.*
 
 
-@DataRedisTest
-@EnableAutoConfiguration
-@AutoConfigureDataRedis
-@ComponentScan(basePackages = [
-    "com.study.studyredis.repository.*",
-])
-@ContextConfiguration(
-    classes = [
-        RedisProperties::class,
-        RedisConfig::class,
-        TestRedisConfig::class,
-    ]
-)
-internal class StudentRepositoryImplTest {
+
+internal class StudentRepositoryImplTest : RedisTestSuite(){
 
     @Autowired
     private lateinit var sut: StudentRedisDao

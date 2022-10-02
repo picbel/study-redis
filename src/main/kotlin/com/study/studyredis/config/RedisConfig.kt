@@ -1,6 +1,9 @@
 package com.study.studyredis.config
 
 import com.study.studyredis.domain.Student
+import org.redisson.Redisson
+import org.redisson.api.RedissonClient
+import org.redisson.config.Config
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -74,6 +77,13 @@ class RedisPubSubConfig{
     @Bean
     fun topic(): ChannelTopic {
         return ChannelTopic("studentGrade")
+    }
+    @Bean
+    fun redissonClient(
+    ): RedissonClient {
+        return Redisson.create(Config().apply {
+            useSingleServer().address = "redis://localhost:6379"
+        })
     }
     interface MessagePublisher {
         fun publish(message: String?)
