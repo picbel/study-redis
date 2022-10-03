@@ -9,6 +9,7 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.autoconfigure.data.redis.AutoConfigureDataRedis
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
@@ -21,7 +22,7 @@ import java.util.*
 internal class StudentRepositoryImplTest : RedisTestSuite(){
 
     @Autowired
-    private lateinit var sut: StudentRedisDao
+    private lateinit var sut: StudentRedisCrudDao
 
     @Test
     fun `redis에 학생정보를 저장합니다`() {

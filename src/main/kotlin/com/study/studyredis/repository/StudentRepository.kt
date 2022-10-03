@@ -2,26 +2,24 @@ package com.study.studyredis.repository
 
 import com.study.studyredis.domain.Student
 import org.redisson.api.RedissonClient
-import org.springframework.context.annotation.Primary
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 import java.util.concurrent.locks.Lock
-import kotlin.concurrent.withLock
 
 
-interface StudentRedisDao : CrudRepository<Student, UUID> {
-    fun getLock(key : UUID) : Lock
+interface StudentRedisCrudDao : CrudRepository<Student, UUID>
+interface StudentRedisDao {
+    fun getLock(key: UUID): Lock
 }
 
-@Primary
 @Repository
 class StudentRedisDaoImpl(
-    private val dao: StudentRedisDao,
-    private val redissonClient: RedissonClient
-) : StudentRedisDao by dao {
+//    private val redissonClient: RedissonClient
+) : StudentRedisDao {
     override fun getLock(key: UUID): Lock {
-        return redissonClient.getLock("A")
+//        return redissonClient.getLock(key.toString())
+        TODO()
     }
 }
 //

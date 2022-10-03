@@ -1,3 +1,4 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.ir.backend.js.compile
 
@@ -31,7 +32,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
-
+    testImplementation("com.github.javafaker:javafaker:1.0.2") {
+        exclude( "org.yaml", "snakeyaml")
+    }
+    testImplementation("org.yaml:snakeyaml:1.30")
 
 }
 
