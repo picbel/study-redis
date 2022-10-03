@@ -19,10 +19,11 @@ import java.util.*
 
 
 
-internal class StudentRepositoryImplTest : RedisTestSuite(){
+@RedisTestSuite
+internal class StudentRepositoryImplTest {
 
     @Autowired
-    private lateinit var sut: StudentRedisCrudDao
+    private lateinit var sut: StudentRedisDao
 
     @Test
     fun `redis에 학생정보를 저장합니다`() {

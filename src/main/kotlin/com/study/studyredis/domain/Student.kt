@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisHash
 import java.util.UUID
 
 
-@RedisHash("Student")
+@RedisHash("student")
 data class Student(
     @Id
     val id: UUID,

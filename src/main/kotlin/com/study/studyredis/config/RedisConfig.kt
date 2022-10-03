@@ -51,7 +51,13 @@ class RedisConfig {
         return template
     }
 
-
+    @Bean
+    fun redissonClient(
+    ): RedissonClient {
+        return Redisson.create(Config().apply {
+            useSingleServer().address = "redis://localhost:6379"
+        })
+    }
 
 }
 
@@ -78,41 +84,35 @@ class RedisPubSubConfig{
     fun topic(): ChannelTopic {
         return ChannelTopic("studentGrade")
     }
-    @Bean
-    fun redissonClient(
-    ): RedissonClient {
-        return Redisson.create(Config().apply {
-            useSingleServer().address = "redis://localhost:6379"
-        })
+}
+
+interface MessagePublisher {
+    fun publish(message: String?)
+}
+
+@Service
+class RedisMessagePublisher(
+    private val redisTemplate: RedisTemplate<*, *>,
+    private val topic: ChannelTopic
+) : MessagePublisher {
+
+
+    override fun publish(message: String?) {
+        redisTemplate.convertAndSend(topic.topic, message!!)
     }
-    interface MessagePublisher {
-        fun publish(message: String?)
+}
+
+@Service
+class RedisMessageSubscriber : MessageListener {
+    override fun onMessage(message: Message, pattern: ByteArray?) {
+        messageList.add(message.toString())
+        println("Message received: $message")
     }
 
-    @Service
-    class RedisMessagePublisher(
-        private val redisTemplate: RedisTemplate<*, *>,
-        private val topic: ChannelTopic
-    ) : MessagePublisher {
-
-
-        override fun publish(message: String?) {
-            redisTemplate.convertAndSend(topic.topic, message!!)
-        }
+    fun comsumeMessage() = messageList.first().apply {
+        messageList.removeFirst()
     }
-
-    @Service
-    class RedisMessageSubscriber : MessageListener {
-        override fun onMessage(message: Message, pattern: ByteArray?) {
-            messageList.add(message.toString())
-            println("Message received: $message")
-        }
-
-        fun comsumeMessage() = messageList.first().apply {
-            messageList.removeFirst()
-        }
-        companion object {
-            val messageList: MutableList<String> = ArrayList()
-        }
+    companion object {
+        val messageList: MutableList<String> = ArrayList()
     }
 }
