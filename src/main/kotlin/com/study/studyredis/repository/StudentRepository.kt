@@ -12,7 +12,7 @@ import java.util.*
 import java.util.concurrent.locks.Lock
 
 
-@Component
+@Repository
 interface StudentRedisCrudDao : CrudRepository<Student, UUID>
 
 interface StudentRedisDao : StudentRedisCrudDao {
